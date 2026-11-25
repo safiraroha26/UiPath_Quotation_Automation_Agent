@@ -40,7 +40,9 @@ An end-to-end **Agentic Orchestration** solution built on **UiPath Studio Web** 
 5. [Google Drive & Gmail] ──► Exports new tab to PDF (Columns A–K only) & saves Gmail draft
 
 ```
+
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0508d64d-688f-48b9-ba5f-64ce22e81652" />
+
 ---
 
 ## 🛠️ Tech Stack & Tools
