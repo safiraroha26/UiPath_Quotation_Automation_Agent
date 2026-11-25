@@ -47,7 +47,7 @@ An end-to-end **Agentic Orchestration** solution built on **UiPath Studio Web** 
 | Component | Technology | Primary Role |
 | :--- | :--- | :--- |
 | **Orchestration Engine** | UiPath Studio Web (*Maestro Automate Flow*) | Coordinates cloud-native execution across AI, Sheets, HTTP, and Gmail nodes. |
-| **AI Extraction Engine** | UiPath AI Agent (`Quotation_Extractor_Agent`) | Parses unstructured request text and performs semantic matching against the product catalog. |
+| **AI Extraction Engine** | UiPath AI Agent (`AI_Quo`) | Parses unstructured request text and performs semantic matching against the product catalog. |
 | **Database & Template** | Google Sheets (`Quotation_Master_Data`) | Stores `Product_Reference`, `Quotation_Template` (with dynamic formulas), and `Quotation_Log`. |
 | **Backend Document Engine** | Google Apps Script (`Code.gs`) | Handles sheet duplication, cell mapping, row cleanup, financial logging, and PDF export rules. |
 | **Storage & Email Delivery** | Google Drive & Gmail (*Integration Service*) | Stores generated PDF quotations (`Folder Quotation_TDN`) and drafts client emails. |
@@ -65,7 +65,6 @@ Before running this project in **UiPath Automation Cloud**, ensure the following
    * Authenticated **Gmail** connection.
 3. **Google Workspace Configuration:**
    * A Google Sheets file named `Quotation_Master_Data` containing three required tabs: `Quotation_Template`, `Product_Reference`, and `Quotation_Log`.
-   * A Google Drive folder named `Folder Quotation_TDN` configured with *Anyone with the link (Viewer)* permissions.
    * `Code.gs` pasted into **Extensions → Apps Script** inside `Quotation_Master_Data` and deployed as a **Web App** (*Execute as: Me*, *Who has access: Anyone*).
 
 ---
@@ -74,8 +73,8 @@ Before running this project in **UiPath Automation Cloud**, ensure the following
 
 ```text
 Quotation_Automation_Source/
-├── Quotation_Agent_Flow.uis               # Main UiPath Maestro Flow orchestration project
-├── Quotation_Extractor_Agent.uis          # Standalone UiPath AI Agent package
+├── Quotation_Agent_Submission.uis         # Main UiPath Maestro Flow orchestration project
+├── AI_Quo.uis                             # Standalone UiPath AI Agent package
 ├── Code.gs                                # Google Apps Script backend (doPost handler)
 ├── Sample_Data/
 │   ├── Quotation_Master_Data_Sample.xlsx  # Sample spreadsheet structure (3 tabs)
@@ -91,16 +90,16 @@ Quotation_Automation_Source/
 
 1. **Import & Deploy the AI Agent:**
    * Log in to [UiPath Automation Cloud](https://cloud.uipath.com/) → **Studio Web**.
-   * Click **Import** and upload `Quotation_Extractor_Agent.uis`.
+   * Click **Import** and upload `AI_Quo.uis`.
    * Verify the `Product_Reference` grounding/schema, then click **Deploy**.
 2. **Import the Maestro Flow:**
-   * Return to the Studio Web home screen, click **Import**, and upload `Quotation_Agent_Flow.uis`.
+   * Return to the Studio Web home screen, click **Import**, and upload `Quotation_Agent_Submission.uis`.
    * Confirm that the **Agent** node points to your newly deployed AI Agent.
 3. **Configure Connections & Web App Endpoint:**
    * Re-bind your **Google Sheets**, **Google Drive**, and **Gmail** connections in the corresponding workflow activities.
    * Open the **HTTP Request** node properties and replace `<MASUKKAN_WEB_APP_URL_APPS_SCRIPT_ANDA>` in the **Request URL** field with your deployed Google Apps Script Web App URL.
 4. **Run the Robot:**
-   * Click **Debug** or **Run** in the top toolbar of `Quotation_Agent_Flow`.
+   * Click **Debug** or **Run** in the top toolbar of `Quotation_Agent_Submission`.
    * Enter a natural-language quotation request (for **1 product**) into the `UserPrompt` input field and execute.
 
 ---
