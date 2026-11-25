@@ -38,6 +38,10 @@ An end-to-end **Agentic Orchestration** solution built on **UiPath Studio Web** 
        │                      • Inserts new row into Quotation_Log directly above the Total row
        ▼
 5. [Google Drive & Gmail] ──► Exports new tab to PDF (Columns A–K only) & saves Gmail draft
+
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0508d64d-688f-48b9-ba5f-64ce22e81652" />
+
 ```
 
 ---
@@ -77,7 +81,7 @@ Quotation_Automation_Source/
 ├── AI_Quo.uis                             # Standalone UiPath AI Agent package
 ├── Code.gs                                # Google Apps Script backend (doPost handler)
 ├── Sample_Data/
-│   ├── Quotation_Master_Data_Sample.xlsx  # Sample spreadsheet structure (3 tabs)
+│   ├── Quotation_Master_Data_Sample.xlsx  # Sample spreadsheet structure
 │   └── Contoh_Output_Quotation.pdf        # Sample generated PDF output (Columns A–K)
 └── README.md                              # Project documentation
 ```
